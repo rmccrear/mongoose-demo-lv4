@@ -1,9 +1,10 @@
 // index.js
 const express = require('express');
 const mongoose = require('mongoose');
-const Song = require("./models/songs"); 
-const Cat = require("./models/cats"); 
+const Song = require("./models/songs");
+const Cat = require("./models/cats");
 const Book = require("./models/books");
+const User = require("./models/user");
 
 
 require('dotenv').config();
@@ -41,7 +42,7 @@ app.post('/cats', async (req, res) => {
     name: data.name,
     breed: data.breed,
     hasOwner: data.hasOwner
-  }); 
+  });
 
   // save to the database
   const savedCat = await myCat.save();
@@ -52,10 +53,10 @@ app.post('/cats', async (req, res) => {
 });
 
 app.post("/books", async (req, res) => {
-  const myBook = new Book( {
-      title: "Recursion",
-      artist: "Blake Crouch",
-      year: 2019
+  const myBook = new Book({
+    title: "Recursion",
+    artist: "Blake Crouch",
+    year: 2019
   })
   // save to the database
   const savedBook = await myBook.save();
@@ -67,9 +68,9 @@ app.post("/books", async (req, res) => {
 
 app.post('/songs', async (req, res) => {
   const favSong = new Song({
-      title: "La Mer",
-      artist: "Claude Debussy",
-      genre: "classical",
+    title: "La Mer",
+    artist: "Claude Debussy",
+    genre: "classical",
   });
 
   //save to database
@@ -81,6 +82,25 @@ app.post('/songs', async (req, res) => {
 
 });
 
+app.post('/users', async (req, res) => {
+  const data = req.body;
+  const newUser = new User({
+    name: data.name,
+    email: data.email,
+    password: data.password,
+  });
+
+  //save to database
+  try {
+    const savedUser = await newUser.save();
+    console.log(savedUser);
+    //return the user object back
+    res.json(savedUser);
+  } catch (e) {
+    res.json(e);
+  }
+}
+);
 
 
 
