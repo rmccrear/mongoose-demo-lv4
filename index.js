@@ -1,8 +1,7 @@
 // index.js
 const express = require('express');
 const mongoose = require('mongoose');
-const Cat = require("./models/cats"); 
-
+const jwt = require('jsonwebtoken');
 
 require('dotenv').config();
 const app = express();
@@ -43,8 +42,19 @@ app.post('/register', async (req, res) => {
 // the jwt will contain your name, email, and role
 // so we can later verify it is you.
 app.post('/login', async (req, res) => {
+
+  // fake data to use for the jwt
+  const userData = {
+    name: "Bob",
+    email: "bob@bobstore.com",
+    role: "member"
+  };
+
+  const token = jwt.sign(userData, 'mysecret');
+  console.log(token);
+
   const data = {
-    token: "this is your token"
+    token: token
   };
   res.json(data);
 })

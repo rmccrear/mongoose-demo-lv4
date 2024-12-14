@@ -1,8 +1,10 @@
 {
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
-    "mongoose": "^8.8.4"
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.9.0"
   },
   "name": "mongoose-demo-lv4",
   "version": "1.0.0",
