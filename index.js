@@ -77,7 +77,37 @@ app.get('/dashboard', (req, res) => {
 });
 
 app.get('/admin', (req, res) => {
-  res.json({message: "this is the admin"})
+  const headers = req.headers;
+  const authHeader = headers.authorization;
+  console.log(authHeader);
+  if (!jwt) {
+    return res.status(401).json({ message: "no auth header in headers" })
+  }
+  const token = authHeader.split(" ")[1];
+  let decoded;
+  try {
+    decoded = jwt.verify(token, JWT_SECRET);
+    console.log(decoded);
+  } catch (error) {
+    console.log(error);
+    return res.status(401).json({
+      message: "invalid token"
+    });
+  }
+
+  const role = decoded.role;
+  // in middleware, you could store this on req.role
+  //    req.role = decoded.role
+  //    next()
+  if (role === 'admin') {
+    res.json({
+      decoded
+    });
+  } else {
+    res.status(401).json({
+      message: "you are not an Administrator"
+    });
+  }
 });
 
 
