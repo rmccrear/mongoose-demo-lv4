@@ -8,6 +8,7 @@ const app = express();
 const port = 3000;
 
 const MONGO_DB_URI = process.env.MONGO_DB_URI;
+const JWT_SECRET = process.env.JWT_SECRET;
 
 // Middleware to parse JSON bodies
 app.use(express.json());
@@ -43,14 +44,26 @@ app.post('/register', async (req, res) => {
 // so we can later verify it is you.
 app.post('/login', async (req, res) => {
 
+  // 1. get the email and password from req.body
+
+  // 2. get the user from database by email
+
+
+  // 3. compare password to see if it matches the one stored in DB
+
+  // 4. if correct, mint a token containing the 
+  //    - name
+  //    - email
+  //    - role
+
   // fake data to use for the jwt
   const userData = {
-    name: "Bob",
-    email: "bob@bobstore.com",
-    role: "member"
+    name: "Alice",
+    email: "alice@bobstore.com",
+    role: "admin"
   };
 
-  const token = jwt.sign(userData, 'mysecret');
+  const token = jwt.sign(userData, JWT_SECRET);
   console.log(token);
 
   const data = {
