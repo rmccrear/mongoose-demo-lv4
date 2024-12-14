@@ -73,17 +73,11 @@ app.post('/login', async (req, res) => {
 
 app.get('/dashboard', (req, res) => {
 
-  res.json({
-    message: "this is the dashboard"
-  })
 
 });
 
 app.get('/admin', (req, res) => {
-
-  res.json({
-    message: "this is the admin"
-  })
+  res.json({message: "this is the admin"})
 });
 
 
