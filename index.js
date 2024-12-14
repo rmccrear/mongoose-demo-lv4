@@ -30,24 +30,25 @@ app.get('/', (req, res) => {
   res.send('Hello, World!');
 });
 
-app.post('/cats', async (req, res) => {
-  // get the data from the request
-  const data = req.body;
-
-  // instantiate a new cat
-  const myCat = new Cat({
-    name: data.name,
-    breed: data.breed,
-    hasOwner: data.hasOwner
-  }); 
-
-  // save to the database
-  const savedCat = await myCat.save();
-  console.log(savedCat)
-
-  // return the cat object back 
-  res.json(savedCat);
+// this will create a user
+app.post('/register', async (req, res) => {
+  const user = {
+    name: "testuser"
+  }
+  res.json(user);
 });
+
+// this will check if you are logged in
+// if so, it will return a jwt
+// the jwt will contain your name, email, and role
+// so we can later verify it is you.
+app.post('/login', async (req, res) => {
+  const data = {
+    token: "this is your token"
+  };
+  res.json(data);
+})
+
 
 
 
