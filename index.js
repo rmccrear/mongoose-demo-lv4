@@ -48,7 +48,6 @@ app.post('/login', async (req, res) => {
 
   // 2. get the user from database by email
 
-
   // 3. compare password to see if it matches the one stored in DB
 
   // 4. if correct, mint a token containing the 
@@ -72,6 +71,20 @@ app.post('/login', async (req, res) => {
   res.json(data);
 })
 
+app.get('/dashboard', (req, res) => {
+
+  res.json({
+    message: "this is the dashboard"
+  })
+
+});
+
+app.get('/admin', (req, res) => {
+
+  res.json({
+    message: "this is the admin"
+  })
+});
 
 
 
